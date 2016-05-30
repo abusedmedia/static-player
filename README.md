@@ -12,6 +12,53 @@ If you use Bower you can install with this line:
 You can also download the .zip of this repo and include the library in your html file.
 
 
+## How it works
+
+You have this .html file
+
+```html
+<html process-init>
+	<head></head>
+	<body>
+
+		<div process=“_partial_1.html”></div>
+
+		<script type=“text/javascript” src=“../../bower_components/jquery/dist/jquery.js”></script>
+		<script type=“text/javascript” src=“../../bower_components/lodash/lodash.js”></script>
+		<script type=“text/javascript” src=“../../bower_components/static-player/static-player.js”></script>
+		
+	</body>
+</html>
+```
+
+And this partial markup
+
+```html
+<section class=“main”>
+	<h1>Title 1</h1>
+</section>
+```
+
+You’ll get this at run time
+
+```html
+<html process-init>
+	<head></head>
+	<body>
+
+		<section class=“main”>
+			<h1>Title 1</h1>
+		</section>
+
+		<script type=“text/javascript” src=“../../bower_components/jquery/dist/jquery.js”></script>
+		<script type=“text/javascript” src=“../../bower_components/lodash/lodash.js”></script>
+		<script type=“text/javascript” src=“../../bower_components/static-player/static-player.js”></script>
+		
+	</body>
+</html>
+```
+
+
 ## Documentation
 
 In progress...

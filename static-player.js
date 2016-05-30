@@ -1,6 +1,7 @@
 window.StaticPlayer = (function (window, undefined) {
 
 	var instance = null;
+	var _debug = false;
 
 	$.holdReady(true)
 
@@ -8,7 +9,7 @@ window.StaticPlayer = (function (window, undefined) {
 		
 		function parse(_selection, _data){
 
-			console.log('---------parse')
+			if(_debug) console.log('---------parse')
 
 			if(_selection.length==0) $.holdReady(false)
 			
@@ -22,11 +23,11 @@ window.StaticPlayer = (function (window, undefined) {
 
 				if(path){
 					function ldr(__self, path, _data){
-						console.log('include', path)
+						if(_debug) console.log('include', path)
 						$.get(path, function(result){
 							var model = $(__self).attr('model')
 							var data = (model) ? _data[model] : _data
-							console.log('included', path, data)
+							if(_debug) console.log('included', path, data)
 							var compiled = _.template(result)
 							var processed = compiled(data)
 
@@ -45,7 +46,7 @@ window.StaticPlayer = (function (window, undefined) {
 					}
 					ldr(self, path, _data)
 				}else{
-					console.log('process')
+					if(_debug) console.log('process')
 					var cnt = $(self).html().replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 					var model = $(self).attr('model')
 					var data = (model) ? _data[model] : _data
@@ -74,14 +75,16 @@ window.StaticPlayer = (function (window, undefined) {
 
 		
 
-		var manualBootstrap = false;
 
 		var begin = function(tag, global){
-			console.log('begin')
-			manualBootstrap = true
+			if(_debug) console.log('begin')
 			var _tag = (tag) ? tag : 'process'
 			var _glob = (global) ? global : window
 			parse( $("["+_tag+"]"), _glob );
+		}
+
+		var debug = function(){
+			_debug = ! _debug
 		}
 
 		if($('[process-init]').length>0){
@@ -89,13 +92,14 @@ window.StaticPlayer = (function (window, undefined) {
 		}
 
 		return {
-	      begin : begin
+	      begin : begin,
+	      debug: debug
 	    };
 	    
 	}
 
 	if($('[process-init]').length>0){
-		console.log('auto')
+		if(_debug) console.log('auto')
 		instance = new initializeNewModule();
 	}
 
