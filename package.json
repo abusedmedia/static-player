@@ -1,10 +1,13 @@
 {
   "name": "static-player",
-  "description": "",
+  "description": "Inject at runtime markup partials",
   "version": "0.0.1",
   "author": {
     "name": "abusedmedia",
     "email": "ff@todo.to.it"
+  },
+  "scripts":{
+    "tag": "npm version patch && git push --tags",
   },
   "devDependencies": {
     "grunt": "^0.4.5",
