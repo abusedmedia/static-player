@@ -7,7 +7,7 @@
     "email": "ff@todo.to.it"
   },
   "scripts":{
-    "tag": "npm version patch && git push --tags",
+    "tag": "npm version patch && git push --tags"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
