@@ -31,7 +31,7 @@ You have this .html file
 </html>
 ```
 
-And this partial markup
+And the partial markup file ‘_partial_1.html’:
 
 ```html
 <section class=“main”>
@@ -58,6 +58,57 @@ You’ll get this at run time
 </html>
 ```
 
+
+Or let’s say the partial is something like:
+
+```html
+<section class=“main”>
+	<h1><%- title %></h1>
+</section>
+```
+
+and the ‘main.html’ file:
+
+```html
+<html process-init>
+	<head></head>
+	<body>
+
+		<div process=“_partial_1.html” model=“data”></div>
+		
+		<script>
+		data = {title: “Super Title”}
+		</script>
+
+		<script src=“bower_components/jquery/dist/jquery.js”></script>
+		<script src=“bower_components/lodash/lodash.js”></script>
+		<script src=“bower_components/static-player/static-player.js”></script>
+		
+	</body>
+</html>
+```
+
+you’ll get something like:
+
+```html
+<html process-init>
+	<head></head>
+	<body>
+
+		<section class=“main”>
+			<h1>Super Title</h1>
+		</section>
+
+		<script src=“bower_components/jquery/dist/jquery.js”></script>
+		<script src=“bower_components/lodash/lodash.js”></script>
+		<script src=“bower_components/static-player/static-player.js”></script>
+		
+	</body>
+</html>
+```
+
+You get the point.
+All this stuff will be then baked through a Grunt script (soon).
 
 ## Documentation
 
