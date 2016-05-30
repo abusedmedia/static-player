@@ -23,9 +23,9 @@ You have this .html file
 
 		<div process=“_partial_1.html”></div>
 
-		<script type=“text/javascript” src=“bower_components/jquery/dist/jquery.js”></script>
-		<script type=“text/javascript” src=“bower_components/lodash/lodash.js”></script>
-		<script type=“text/javascript” src=“bower_components/static-player/static-player.js”></script>
+		<script src=“bower_components/jquery/dist/jquery.js”></script>
+		<script src=“bower_components/lodash/lodash.js”></script>
+		<script src=“bower_components/static-player/static-player.js”></script>
 		
 	</body>
 </html>
@@ -50,9 +50,9 @@ You’ll get this at run time
 			<h1>Title 1</h1>
 		</section>
 
-		<script type=“text/javascript” src=“bower_components/jquery/dist/jquery.js”></script>
-		<script type=“text/javascript” src=“bower_components/lodash/lodash.js”></script>
-		<script type=“text/javascript” src=“bower_components/static-player/static-player.js”></script>
+		<script src=“bower_components/jquery/dist/jquery.js”></script>
+		<script src=“bower_components/lodash/lodash.js”></script>
+		<script src=“bower_components/static-player/static-player.js”></script>
 		
 	</body>
 </html>
