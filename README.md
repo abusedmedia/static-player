@@ -1,15 +1,8 @@
 # static-player
 
+Develop static web things with happiness exploiting runtime ‘includes’ and a powerful ‘templating system’.
 
 
-
-## Install
-
-If you use Bower you can install with this line:
-
-	bower install static-player
-
-You can also download the .zip of this repo and include the library in your html file.
 
 
 ## How it works
@@ -108,7 +101,25 @@ you’ll get something like:
 ```
 
 You get the point.
-All this stuff will be then baked through a Grunt script (soon).
+
+More about templating? It’s just [lodash.template()](https://lodash.com/docs#template).
+
+And all this stuff will be then baked through a Grunt script for server happiness (release soon).
+
+
+
+
+## Install
+
+If you use Bower you can install with this line:
+
+	bower install static-player
+
+You can also download the .zip of this repo and include the library in your html file.
+You need to include the all the required scripts that are ```jquery```, ```lodash``` and ```static-player```.
+
+
+
 
 ## Documentation
 
