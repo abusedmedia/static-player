@@ -22,26 +22,36 @@ window.StaticPlayer = (function (window, undefined) {
 				$(self).removeAttr('process')
 
 				if(path){
+
+					var exts = path.split('.')
+					var ext = exts[exts.length-1].toLowerCase()
+
 					function ldr(__self, path, _data){
-						if(_debug) console.log('include', path)
+						if(_debug) console.log('include', path, ext)
 						$.get(path, function(result){
-							var model = $(__self).attr('model')
-							var data = (model) ? _data[model] : _data
-							if(_debug) console.log('included', path, data)
-							var compiled = _.template(result)
-							var processed = compiled(data)
 
-							var newfrag = finalize(__self, processed, true)
+							if(ext == 'svg'){
+								finalize(__self, result, true, true)
+							}else{
+								var model = $(__self).attr('model')
+								var data = (model) ? _data[model] : _data
+								if(_debug) console.log('included', path, data)
+								var compiled = _.template(result)
+								var processed = compiled(data)
+
+								var newfrag = finalize(__self, processed, true)
+								
+								count++
+								if(count >= _selection.length) $.holdReady(false)
+
+								setTimeout(function(){
+									var match = newfrag.match(/process/g)
+									if(match && match.length>0){
+										parse( $("[process]"), data );
+									}
+								})
+							}
 							
-							count++
-							if(count >= _selection.length) $.holdReady(false)
-
-							setTimeout(function(){
-								var match = newfrag.match(/process/g)
-								if(match && match.length>0){
-									parse( $("[process]"), data );
-								}
-							})
 						})
 					}
 					ldr(self, path, _data)
@@ -55,16 +65,17 @@ window.StaticPlayer = (function (window, undefined) {
 					finalize(self, processed, true)
 				}
 
-				function finalize(self, processed, remove){
+				function finalize(self, processed, remove, is_svg){
 					var prev = $(self).prev()
+					var frag = (is_svg) ? processed.documentElement : processed
 					if(prev.length>0){
-						var newfrag = prev.after(processed)
+						var newfrag = prev.after(frag)
 					}else{
-						var newfrag = $(self).parent().prepend(processed)
+						var newfrag = $(self).parent().prepend(frag)
 					}
 					if(remove) $(self).remove()
 
-					return processed			
+					return frag			
 				}
 
 				
