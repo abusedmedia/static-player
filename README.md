@@ -128,8 +128,6 @@ In progress...
 
 ## Contribute
 
-Push on master then ```npm run tag``` to bump a new release then ```npm publish``` to the updates
-
 
 ## License
 
