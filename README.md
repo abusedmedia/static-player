@@ -123,7 +123,17 @@ You need to include the all the required scripts that are ```jquery```, ```lodas
 
 ## Documentation
 
-In progress...
+
+#### Wrapper
+
+By default the wrapper that contains the ```process``` attribute will be stripped out instead of the processed template.
+If you need to keep in the markup su need to add an additional attribute ```process-keep```
+
+```html
+
+	<div process-keep process=“_partial_1.html” model=“data”></div>
+
+```
 
 
 ## Contribute
