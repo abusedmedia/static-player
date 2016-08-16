@@ -33,6 +33,8 @@ window.StaticPlayer = (function (window, undefined) {
 
 							if(ext == 'svg'){
 								finalize(__self, result, keep, true)
+								count++
+								if(count >= _selection.length) $.holdReady(false)
 							}else{
 								var model = $(__self).attr('model')
 								var data = (model) ? _data[model] : _data
