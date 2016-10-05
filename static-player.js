@@ -32,7 +32,7 @@ window.StaticPlayer = (function (window, undefined) {
 						$.get(path, function(result){
 
 							if(ext == 'svg'){
-								finalize(__self, result, keep, true)
+								finalize(__self, result, keep, path, true)
 								count++
 								if(count >= _selection.length) $.holdReady(false)
 							}else{
@@ -42,7 +42,7 @@ window.StaticPlayer = (function (window, undefined) {
 								var compiled = _.template(result)
 								var processed = compiled(data)
 
-								var newfrag = finalize(__self, processed, keep)
+								var newfrag = finalize(__self, processed, keep, path)
 								
 								count++
 								if(count >= _selection.length) $.holdReady(false)
@@ -65,10 +65,10 @@ window.StaticPlayer = (function (window, undefined) {
 					var data = (model) ? _data[model] : _data
 					var compiled = _.template(cnt)
 					var processed = compiled(data)
-					finalize(self, processed, keep)
+					finalize(self, processed, keep, path)
 				}
 
-				function finalize(self, processed, keep, is_svg){
+				function finalize(self, processed, keep, path, is_svg){
 					var frag = (is_svg) ? processed.documentElement : processed
 
 					if(!keep){
@@ -83,6 +83,8 @@ window.StaticPlayer = (function (window, undefined) {
 						$(self).empty()
 						$(self).append(frag)
 					}
+
+					if(path) $(frag).attr('data-path', path)
 
 					return frag			
 				}
