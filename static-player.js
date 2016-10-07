@@ -69,7 +69,7 @@ window.StaticPlayer = (function (window, undefined) {
 				}
 
 				function finalize(self, processed, keep, path, is_svg){
-					var frag = (is_svg) ? processed.documentElement : processed
+					var frag = (is_svg && processed.documentElement) ? processed.documentElement : processed
 
 					if(!keep){
 						var prev = $(self).prev()
