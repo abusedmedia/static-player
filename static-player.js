@@ -13,8 +13,6 @@ window.StaticPlayer = (function (window, undefined) {
 
 			if(_selection.length==0) $.holdReady(false)
 			
-			var count = 0
-
 			_selection.each(function () {
 				var self = this
 
@@ -33,8 +31,6 @@ window.StaticPlayer = (function (window, undefined) {
 
 							if(ext == 'svg'){
 								finalize(__self, result, keep, path, true)
-								count++
-								if(count >= _selection.length) $.holdReady(false)
 							}else{
 								var model = $(__self).attr('model')
 								var data = (model) ? _data[model] : _data
@@ -43,14 +39,13 @@ window.StaticPlayer = (function (window, undefined) {
 								var processed = compiled(data)
 
 								var newfrag = finalize(__self, processed, keep, path)
-								
-								count++
-								if(count >= _selection.length) $.holdReady(false)
 
 								setTimeout(function(){
 									var match = newfrag.match(/process/g)
 									if(match && match.length>0){
 										parse( $("[process]"), data );
+									} else {
+										$.holdReady(false)
 									}
 								})
 							}
