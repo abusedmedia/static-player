@@ -6,13 +6,19 @@ window.StaticPlayer = (function (window, undefined) {
 	$.holdReady(true)
 
 	function initializeNewModule() {
+
+		var timer
+
+		function checkForReady(){
+			timer = setTimeout(function(){
+				$.holdReady(false)
+			}, 500)
+		}
 		
 		function parse(_selection, _data){
 
 			if(_debug) console.log('---------parse')
 
-			if(_selection.length==0) $.holdReady(false)
-			
 			_selection.each(function () {
 				var self = this
 
@@ -29,12 +35,13 @@ window.StaticPlayer = (function (window, undefined) {
 						if(_debug) console.log('include', path, ext)
 						$.get(path, function(result){
 
+							if(_debug) console.log('included', path, data)
+
 							if(ext == 'svg'){
 								finalize(__self, result, keep, path, true)
 							}else{
 								var model = $(__self).attr('model')
 								var data = (model) ? _data[model] : _data
-								if(_debug) console.log('included', path, data)
 								var compiled = _.template(result)
 								var processed = compiled(data)
 
@@ -44,12 +51,12 @@ window.StaticPlayer = (function (window, undefined) {
 									var match = newfrag.match(/process/g)
 									if(match && match.length>0){
 										parse( $("[process]"), data );
-									} else {
-										$.holdReady(false)
+										clearTimeout(timer)
 									}
 								})
 							}
 							
+							checkForReady()
 						})
 					}
 					ldr(self, path, _data)
@@ -98,6 +105,7 @@ window.StaticPlayer = (function (window, undefined) {
 			var _tag = (tag) ? tag : 'process'
 			var _glob = (global) ? global : window
 			parse( $("["+_tag+"]"), _glob );
+			checkForReady()
 		}
 
 		var debug = function(){
