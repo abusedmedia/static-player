@@ -1,4 +1,4 @@
-# static-player
+# static-player [![npm version](https://badge.fury.io/js/static-player.svg)](https://badge.fury.io/js/static-player)
 
 Develop static web things with happiness exploiting runtime ‘includes’ and a powerful ‘templating system’.
 
